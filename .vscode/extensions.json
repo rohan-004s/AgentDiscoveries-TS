@@ -1,3 +1,7 @@
 {
-  "recommendations": ["mikestead.dotenv", "esbenp.prettier-vscode", "Orta.vscode-jest"]
+  "recommendations": [
+    "mikestead.dotenv",
+    "esbenp.prettier-vscode",
+    "Orta.vscode-jest"
+  ]
 }
