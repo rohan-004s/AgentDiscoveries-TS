@@ -1,7 +1,6 @@
 {
   "name": "agent-discoveries",
   "version": "1.0.0",
-  "description": "",
   "scripts": {
     "install-backend": "npm --prefix ./agent-discoveries-backend install",
     "install-frontend": "npm --prefix ./agent-discoveries-frontend install",
@@ -11,11 +10,9 @@
     "test-frontend": "npm --prefix ./agent-discoveries-frontend test",
     "test": "npm run test-backend && npm run test-frontend"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "husky": "^8.0.1",
+    "prettier": "^2.7.1",
     "pretty-quick": "^3.1.3"
   }
 }
