@@ -3,24 +3,18 @@
   "compilerOptions": {
     "target": "es2016",
     "lib": ["ESNext"],
-
     "allowJs": false,
     "skipLibCheck": true,
-
     "strict": true,
-
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "module": "commonjs",
     "moduleResolution": "Node",
-
     "removeComments": true,
-
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitAny": true,
-
     "rootDir": "src",
     "outDir": "dist"
   },
