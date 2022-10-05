@@ -1,4 +1,6 @@
-export default {
+import { Config } from 'jest'
+
+const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
@@ -9,4 +11,7 @@ export default {
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
   },
   transformIgnorePatterns: ['<rootDir>/node_modules'],
+  roots: ['<rootDir>/src'],
 }
+
+export default config

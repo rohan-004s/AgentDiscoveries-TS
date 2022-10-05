@@ -2,7 +2,6 @@
   "name": "agent-discoveries-backend",
   "version": "1.0.0",
   "main": "./dist/server.js",
-  "type": "module",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "dev": "ts-node-dev --respawn --transpile-only -r dotenv/config ./src/server.ts",
