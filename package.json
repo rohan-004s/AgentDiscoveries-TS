@@ -7,12 +7,12 @@
     "install:backend": "cd agent-discoveries-backend && npm install",
     "install:frontend": "cd agent-discoveries-frontend && npm install",
     "postinstall": "run-s install:backend install:frontend",
-    "test:backend": "cd ./agent-discoveries-backend && npm test",
-    "test:frontend": "cd ./agent-discoveries-frontend && npm test",
-    "test": "run-s test:**",
-    "dev:backend": "./agent-discoveries-backend && npm run dev",
-    "dev:frontend": "./agent-discoveries-frontend && npm run dev",
-    "dev": "run-p -l dev:**"
+    "🔬:🏢": "cd ./agent-discoveries-backend && npm test",
+    "🔬:👓": "cd ./agent-discoveries-frontend && npm test",
+    "test": "run-s -l 🔬:**",
+    "▶️:🏢": "cd ./agent-discoveries-backend && npm run dev",
+    "▶️:👓": "cd ./agent-discoveries-frontend && npm run dev",
+    "dev": "run-p -l ▶️:**"
   },
   "devDependencies": {
     "husky": "^8.0.1",
