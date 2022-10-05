@@ -4,14 +4,14 @@
   "type": "module",
   "scripts": {
     "prepare": "husky install",
-    "install:backend": "npm --prefix ./agent-discoveries-backend install",
-    "install:frontend": "npm --prefix ./agent-discoveries-frontend install",
+    "install:backend": "cd agent-discoveries-backend && npm install",
+    "install:frontend": "cd agent-discoveries-frontend && npm install",
     "postinstall": "run-s install:backend install:frontend",
-    "test:backend": "npm --prefix ./agent-discoveries-backend test",
-    "test:frontend": "npm --prefix ./agent-discoveries-frontend test",
+    "test:backend": "cd ./agent-discoveries-backend && npm test",
+    "test:frontend": "cd ./agent-discoveries-frontend && npm test",
     "test": "run-s test:**",
-    "dev:backend": "npm run --prefix ./agent-discoveries-backend dev",
-    "dev:frontend": "npm run --prefix ./agent-discoveries-frontend dev",
+    "dev:backend": "./agent-discoveries-backend && npm run dev",
+    "dev:frontend": "./agent-discoveries-frontend && npm run dev",
     "dev": "run-p -l dev:**"
   },
   "devDependencies": {
