@@ -3,19 +3,21 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "prepare": "husky install",
     "install:backend": "npm --prefix ./agent-discoveries-backend install",
     "install:frontend": "npm --prefix ./agent-discoveries-frontend install",
-    "postinstall": "npm run install:backend && npm run install:frontend",
-    "prepare": "husky install",
-    "test": "jest",
+    "postinstall": "run-s install:backend install:frontend",
+    "test:backend": "npm --prefix ./agent-discoveries-backend test",
+    "test:frontend": "npm --prefix ./agent-discoveries-frontend test",
+    "test": "run-s test:**",
     "dev:backend": "npm run --prefix ./agent-discoveries-backend dev",
     "dev:frontend": "npm run --prefix ./agent-discoveries-frontend dev",
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+    "dev": "run-p -l dev:**"
   },
   "devDependencies": {
-    "concurrently": "^7.4.0",
     "husky": "^8.0.1",
     "jest": "^29.1.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "pretty-quick": "^3.1.3",
     "ts-node": "^10.9.1",
