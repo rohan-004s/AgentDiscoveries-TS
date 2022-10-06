@@ -8,6 +8,7 @@ const config: Config = {
   },
   transformIgnorePatterns: ['<rootDir>/node_modules'],
   roots: ['<rootDir>/src'],
+  setupFiles: ['<rootDir>/setupTests.ts'],
 }
 
 export default config

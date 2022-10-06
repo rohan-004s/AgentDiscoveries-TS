@@ -17,6 +17,9 @@ Run `npm install`.
 
 This will install dependencies for all folders.
 
+There will be a `.env` file in the `agent-discoveries-backend` directory.
+This will be where you put your local environment variables.
+
 # Running the application
 
 Open the terminal at the root of the project.
@@ -24,6 +27,10 @@ Open the terminal at the root of the project.
 Run `npm run dev` to start up the project in development mode.
 
 Press `Ctrl + C` in the terminal to stop the project.
+
+# Database
+
+Knex
 
 # Tests
 
