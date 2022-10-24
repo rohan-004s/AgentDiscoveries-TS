@@ -12,11 +12,11 @@ describe('Migrations', () => {
     db.destroy()
   })
 
-  test('It should successfully migrate up', () => {
+  it('Migrates up successfully', () => {
     return expect(db.migrate.latest()).resolves.not.toThrow()
   })
 
-  test('It should successfully migrate down after migrating up', () => {
+  it('Migrates down successfully after migrating up', () => {
     return expect(
       db.migrate.latest().then(() => db.migrate.rollback(undefined, true)),
     ).resolves.not.toThrow()
