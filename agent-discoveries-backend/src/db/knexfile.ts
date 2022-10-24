@@ -1,4 +1,5 @@
 import type { Knex } from 'knex'
+import path from 'path'
 
 const config: { [key: string]: Knex.Config } = {
   development: {
@@ -10,10 +11,12 @@ const config: { [key: string]: Knex.Config } = {
   },
   test: {
     client: 'better-sqlite3',
-    connection: {
-      filename: './test.sqlite3',
-    },
+    connection: ':memory:',
     useNullAsDefault: true,
+    migrations: {
+      extension: 'ts',
+      directory: path.join(__dirname, 'migrations'),
+    },
   },
 }
 

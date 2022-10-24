@@ -7,8 +7,9 @@ import { Express } from 'express'
 let db: Knex
 let server: Express
 
-beforeAll(() => {
+beforeAll(async () => {
   db = createDbConnection()
+  await db.migrate.latest()
   server = app({ db })
 })
 
