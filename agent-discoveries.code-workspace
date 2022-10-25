@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "agent-discoveries-backend"
+		},
+		{
+			"path": "agent-discoveries-frontend"
+		}
+	],
+	"settings": {
+		"jest.disabledWorkspaceFolders": [
+			"agent-discoveries-frontend"
+		]
+	}
+}
