@@ -6,7 +6,7 @@ export const hashPassword = (password: string) =>
     .genSalt(config.crypto.saltRounds)
     .then((salt) => bcrypt.hash(password, salt))
 
-export const doesPasswordMatch = (
+export const doPasswordsMatch = (
   plaintextPassword: string | Buffer,
   hashedPassword: string,
 ) => bcrypt.compare(plaintextPassword, hashedPassword).catch(() => false)

@@ -3,6 +3,7 @@ import session from 'express-session'
 import { Knex } from 'knex'
 import config from './config'
 import connectSessionKnex from 'connect-session-knex'
+import user from './routes/user'
 
 interface appProperties {
   db: Knex
@@ -22,10 +23,14 @@ function app({ db }: appProperties) {
     }),
   )
 
+  app.use(express.json())
+
   app.get('/', async (_req, res) => {
     const test = await db('sqlite_master').select('*')
     res.status(200).json({ status: 'ok', test })
   })
+
+  app.use('/user', user(db))
 
   return app
 }

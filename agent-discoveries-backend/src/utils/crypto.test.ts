@@ -1,10 +1,10 @@
-import { hashPassword, doesPasswordMatch } from './crypto'
+import { hashPassword, doPasswordsMatch } from './crypto'
 
 describe('The cryptography utility', () => {
   it('Correctly matches a password with its hashed version', async () => {
     const testPassword = 'test-password'
     expect(
-      await doesPasswordMatch(
+      await doPasswordsMatch(
         testPassword,
         await hashPassword(testPassword),
       ),
@@ -15,7 +15,7 @@ describe('The cryptography utility', () => {
     const hashedPassword = 'hashed-password'
     const wrongPassword = 'wrong-password'
     expect(
-      await doesPasswordMatch(
+      await doPasswordsMatch(
         wrongPassword,
         await hashPassword(hashedPassword),
       ),
@@ -25,6 +25,6 @@ describe('The cryptography utility', () => {
   it('Returns false if a hashed password is bad', async () => {
     const badHash = 'Bad Hash'
     const wrongPassword = 'wrong-password'
-    expect(await doesPasswordMatch(wrongPassword, badHash)).toBeFalsy()
+    expect(await doPasswordsMatch(wrongPassword, badHash)).toBeFalsy()
   })
 })
