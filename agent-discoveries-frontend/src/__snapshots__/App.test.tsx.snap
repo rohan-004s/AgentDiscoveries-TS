@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`App Matches the snapshot 1`] = `
+exports[`App > Matches the snapshot 1`] = `
 <DocumentFragment>
   <div
     class="App"
@@ -23,18 +23,53 @@ exports[`App Matches the snapshot 1`] = `
         <img
           alt="React logo"
           class="logo react"
+          src="/src/assets/react.svg"
         />
       </a>
     </div>
     <h1>
-      Vite + React
+      Agent Discoveries
     </h1>
     <div
       class="card"
     >
-      <button>
-        count is 0
-      </button>
+      <form>
+        <ul>
+          <li>
+            <label
+              for="username"
+            >
+              Username 
+            </label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              value=""
+            />
+          </li>
+          <li>
+            <label
+              for="password"
+            >
+              Password 
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              value=""
+            />
+          </li>
+          <li>
+            <button
+              type="submit"
+            >
+              Submit
+            </button>
+          </li>
+        </ul>
+      </form>
       <p>
         Edit 
         <code>

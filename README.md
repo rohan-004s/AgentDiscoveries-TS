@@ -17,8 +17,9 @@ Run `npm install`.
 
 This will install dependencies for all folders.
 
-There will be a `.env` file in the `agent-discoveries-backend` directory.
-This will be where you put your local environment variables.
+There will be a `.env` file in the `agent-discoveries-backend` and
+`agent-discoveries-frontend` directory, which will hold environment
+variables.
 
 # Running the application
 
@@ -30,7 +31,7 @@ Press `Ctrl + C` in the terminal to stop the project.
 
 # Database
 
-Knex
+We are using knex to interface with a sqlite 3 database.
 
 # Tests
 
@@ -41,5 +42,7 @@ E.g. The test file for `./agent-discoveries-backend/src/app.ts` is
 
 To run all tests, run `npm test` in the root of the project.
 
-You can also use the `Jest` extension in VSCode, and run tests more
-selectively using the testing tab.
+For the backend tests, you can also use the `Jest` extension in VSCode, and
+run tests more selectively using the testing tab.
+
+For frontend tests, you can run `npx vitest` to use vitest.

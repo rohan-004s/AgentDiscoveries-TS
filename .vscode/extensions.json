@@ -2,6 +2,7 @@
   "recommendations": [
     "mikestead.dotenv",
     "esbenp.prettier-vscode",
-    "Orta.vscode-jest"
+    "orta.vscode-jest",
+    "alexcvzz.vscode-sqlite"
   ]
 }
