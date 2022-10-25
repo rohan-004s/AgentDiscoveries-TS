@@ -4,6 +4,7 @@ import { Knex } from 'knex'
 import config from './config'
 import connectSessionKnex from 'connect-session-knex'
 import user from './routes/user'
+import cors from 'cors'
 
 interface appProperties {
   db: Knex
@@ -13,6 +14,8 @@ function app({ db }: appProperties) {
   const app = express()
   const KnexSessionStore = connectSessionKnex(session)
   const store = new KnexSessionStore({ knex: db })
+
+  app.use(cors({ origin: config.frontend.url, credentials: true }))
 
   app.use(
     session({

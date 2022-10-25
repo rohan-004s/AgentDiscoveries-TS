@@ -1,9 +1,10 @@
-import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
+import Login from './Login'
+import { useState } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
     <div className="App">
@@ -15,11 +16,13 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Agent Discoveries</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        {isLoggedIn ? (
+          <h2>You've logged in!</h2>
+        ) : (
+          <Login setIsLoggedIn={setIsLoggedIn} />
+        )}
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>

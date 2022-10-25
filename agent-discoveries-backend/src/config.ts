@@ -26,6 +26,9 @@ const config = {
     getSecret: () => requiredEnvVariable('SESSION_SECRET'),
   },
   environment: process.env.NODE_ENV ?? 'production',
+  frontend: {
+    url: 'http://localhost:5173',
+  },
 }
 
 export default config

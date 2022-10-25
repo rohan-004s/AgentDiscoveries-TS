@@ -26,20 +26,24 @@ function createRouter(db: Knex) {
   router.post('/login', async (req, res) => {
     const { username, password } = req.body
 
-    const [{ hashedPassword }] = await db
-      .select('hashedPassword')
-      .from<User>('users')
-      .where({ username })
+    try {
+      const [{ hashedPassword }] = await db
+        .select('hashedPassword')
+        .from<User>('users')
+        .where({ username })
 
-    if (!(await doPasswordsMatch(password, hashedPassword))) {
+      if (!(await doPasswordsMatch(password, hashedPassword))) {
+        res.status(400).send()
+      }
+
+      req.session.user = (
+        await db.select().from<User>('users').where({ username })
+      )[0]
+
+      res.status(200).send()
+    } catch (e) {
       res.status(400).send()
     }
-
-    req.session.user = (
-      await db.select().from<User>('users').where({ username })
-    )[0]
-
-    res.status(200).send()
   })
 
   return router
