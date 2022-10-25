@@ -15,12 +15,15 @@ const requiredEnvVariable = (name: string) => {
 }
 
 const config = {
+  crypto: {
+    saltRounds: Number(process.env.SALT_ROUNDS ?? 10),
+  },
   http: {
     hostname: process.env.HOSTNAME ?? 'localhost',
     port: Number(process.env.PORT ?? 3000),
   },
   session: {
-    secret: requiredEnvVariable('SESSION_SECRET'),
+    getSecret: () => requiredEnvVariable('SESSION_SECRET'),
   },
   environment: process.env.NODE_ENV ?? 'production',
 }
