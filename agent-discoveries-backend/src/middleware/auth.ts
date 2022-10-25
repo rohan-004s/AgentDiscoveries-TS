@@ -32,8 +32,6 @@ export default function createAuthMiddleware(knex: Knex) {
     next: NextFunction,
   ) {
     try {
-      console.log(JSON.stringify(req.session.user))
-
       const isAdmin = await knex
         .select('admin')
         .from<User>('users')
