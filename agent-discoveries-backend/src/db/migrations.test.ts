@@ -4,7 +4,7 @@ import createDbConnection from '.'
 let db: Knex
 
 describe('Migrations', () => {
-  beforeEach(async () => {
+  beforeEach(() => {
     db = createDbConnection()
   })
 

@@ -51,9 +51,9 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 export async function down(knex: Knex): Promise<void> {
-  await knex.schema.dropTable('location_reports')
-  await knex.schema.dropTable('locations')
-  await knex.schema.dropTable('regions')
-  await knex.schema.dropTable('users')
-  await knex.schema.dropTable('agents')
+  await knex.schema.dropTableIfExists('location_reports')
+  await knex.schema.dropTableIfExists('locations')
+  await knex.schema.dropTableIfExists('regions')
+  await knex.schema.dropTableIfExists('users')
+  await knex.schema.dropTableIfExists('agents')
 }
