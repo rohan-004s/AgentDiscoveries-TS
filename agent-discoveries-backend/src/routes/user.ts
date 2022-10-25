@@ -40,7 +40,7 @@ function createRouter(db: Knex) {
         await db.select().from<User>('users').where({ username })
       )[0]
 
-      res.status(200).send()
+      res.status(200).json({ username }).send()
     } catch (e) {
       res.status(400).send()
     }

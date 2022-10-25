@@ -75,6 +75,16 @@ describe('The login route', () => {
     expect(response.statusCode).toBe(200)
   })
 
+  it('Returns the username when successful', async () => {
+    const response = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(
+        JSON.stringify({ username: 'test_user', password: 'password' }),
+      )
+    expect(response.body).toEqual({ username: 'test_user' })
+  })
+
   it('Sets session when successful', async () => {
     const response = await request(server)
       .post('/user/login')
