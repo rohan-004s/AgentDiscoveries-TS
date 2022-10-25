@@ -17,6 +17,10 @@ const config: { [key: string]: Knex.Config } = {
       extension: 'ts',
       directory: path.join(__dirname, 'migrations'),
     },
+    seeds: {
+      extension: 'ts',
+      directory: path.join(__dirname, 'seeds'),
+    },
   },
 }
 
