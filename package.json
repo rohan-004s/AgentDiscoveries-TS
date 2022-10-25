@@ -13,7 +13,8 @@
     "▶️:🏢": "cd ./agent-discoveries-backend && npm run dev",
     "▶️:👓": "cd ./agent-discoveries-frontend && npm run dev",
     "dev": "run-p -l ▶️:**",
-    "migrate": "cd ./agent-discoveries-backend && npm run migrate"
+    "migrate": "cd ./agent-discoveries-backend && npm run migrate",
+    "seed": "cd ./agent-discoveries-backend && npm run seed"
   },
   "devDependencies": {
     "husky": "^8.0.1",

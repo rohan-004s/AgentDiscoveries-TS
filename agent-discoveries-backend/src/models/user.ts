@@ -1,6 +1,6 @@
 export interface User {
-  user_id: number
+  userId: number
   username: string
-  hashed_password: string
-  agent_id?: number
+  hashedPassword: string
+  agentId?: number
 }

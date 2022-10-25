@@ -1,7 +1,7 @@
 export interface Location {
-  location_id: number
-  site_name: string
+  locationId: number
+  siteName: string
   location: string
-  time_zone: string
-  region_id?: number
+  timeZone: string
+  regionId?: number
 }

@@ -9,36 +9,36 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('users').del()
 
   // Inserts seed entries
-  const agents: Omit<Agent, 'agent_id'>[] = [
+  const agents: Omit<Agent, 'agentId'>[] = [
     {
-      call_sign: 'Joker',
-      first_name: 'Ren',
-      last_name: 'Amamiya',
-      date_of_birth: '2000-01-01',
-      agent_rank: 4,
+      callSign: 'Joker',
+      firstName: 'Ren',
+      lastName: 'Amamiya',
+      dateOfBirth: '2000-01-01',
+      agentRank: 4,
     },
   ]
-  const agentIds: { agent_id: number }[] = await knex('agents')
+  const agentIds: { agentId: number }[] = await knex('agents')
     .insert(agents)
-    .returning('agent_id')
+    .returning('agentId')
 
-  const users: Omit<User, 'user_id'>[] = [
+  const users: Omit<User, 'userId'>[] = [
     {
       username: 'joker',
-      hashed_password: await hashPassword('TakeYourHeart'),
-      agent_id: agentIds[0]?.agent_id,
+      hashedPassword: await hashPassword('TakeYourHeart'),
+      agentId: agentIds[0]?.agentId,
     },
     {
       username: 'test_user',
-      hashed_password: await hashPassword('password'),
+      hashedPassword: await hashPassword('password'),
     },
     {
       username: 'corrupt_user',
-      hashed_password: 'bad hash',
+      hashedPassword: 'bad hash',
     },
     {
       username: 'admin',
-      hashed_password: await hashPassword('password'),
+      hashedPassword: await hashPassword('password'),
     },
   ]
 

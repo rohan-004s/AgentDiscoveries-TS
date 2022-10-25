@@ -9,7 +9,8 @@
     "test:types": "tsc --noEmit",
     "test:jest": "jest",
     "test": "run-s test:**",
-    "migrate": "npx knex --knexfile ./src/db/knexfile.ts migrate:latest"
+    "migrate": "npx knex --knexfile ./src/db/knexfile.ts migrate:latest",
+    "seed": "npx knex --knexfile src/db/knexfile.ts seed:run"
   },
   "dependencies": {
     "@types/better-sqlite3": "^7.6.0",

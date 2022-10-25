@@ -8,21 +8,21 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('locations').del()
 
   // Inserts seed entries
-  const regions: Omit<Region, 'region_id'>[] = [
+  const regions: Omit<Region, 'regionId'>[] = [
     {
       name: 'England',
     },
   ]
-  const regionIds: { region_id: number }[] = await knex('regions')
+  const regionIds: { regionId: number }[] = await knex('regions')
     .insert(regions)
-    .returning('region_id')
+    .returning('regionId')
 
-  const locations: Omit<Location, 'location_id'>[] = [
+  const locations: Omit<Location, 'locationId'>[] = [
     {
-      site_name: 'MI6',
+      siteName: 'MI6',
       location: 'London',
-      time_zone: 'Europe/London',
-      region_id: regionIds[0]?.region_id,
+      timeZone: 'Europe/London',
+      regionId: regionIds[0]?.regionId,
     },
   ]
 

@@ -3,55 +3,55 @@ import { Knex } from 'knex'
 export async function up(knex: Knex): Promise<void> {
   // Agents and Users
   await knex.schema.createTable('agents', (table) => {
-    table.increments('agent_id').primary()
-    table.string('call_sign').notNullable().unique()
-    table.string('first_name').notNullable()
-    table.string('last_name').notNullable()
-    table.date('date_of_birth').notNullable()
-    table.integer('agent_rank').notNullable()
+    table.increments('agentId').primary()
+    table.string('callSign').notNullable().unique()
+    table.string('firstName').notNullable()
+    table.string('lastName').notNullable()
+    table.date('dateOfBirth').notNullable()
+    table.integer('agentRank').notNullable()
   })
 
   await knex.schema.createTable('users', (table) => {
-    table.increments('user_id').primary()
+    table.increments('userId').primary()
     table.string('username').notNullable().unique()
-    table.string('hashed_password').notNullable()
+    table.string('hashedPassword').notNullable()
     table
-      .integer('agent_id')
-      .references('agents.agent_id')
+      .integer('agentId')
+      .references('agents.agentId')
       .onDelete('SET NULL')
   })
 
   // Regions and Locations
   await knex.schema.createTable('regions', (table) => {
-    table.increments('region_id').primary()
+    table.increments('regionId').primary()
     table.string('name').notNullable()
   })
 
   await knex.schema.createTable('locations', (table) => {
-    table.increments('location_id').primary()
-    table.string('site_name').notNullable()
+    table.increments('locationId').primary()
+    table.string('siteName').notNullable()
     table.string('location').notNullable()
-    table.string('time_zone').notNullable()
+    table.string('timeZone').notNullable()
     table
-      .integer('region_id')
-      .references('regions.region_id')
+      .integer('regionId')
+      .references('regions.regionId')
       .onDelete('SET NULL')
   })
 
   // Reports
-  await knex.schema.createTable('location_reports', (table) => {
-    table.increments('report_id').primary()
-    table.integer('location_id').references('locations.location_id')
-    table.integer('region_id').references('regions.region_id')
-    table.integer('agent_id').references('agents.agent_id')
+  await knex.schema.createTable('locationReports', (table) => {
+    table.increments('reportId').primary()
+    table.integer('locationId').references('locations.locationId')
+    table.integer('regionId').references('regions.regionId')
+    table.integer('agentId').references('agents.agentId')
     table.smallint('status').notNullable()
-    table.datetime('report_time').notNullable()
-    table.text('report_body').notNullable()
+    table.datetime('reportTime').notNullable()
+    table.text('reportBody').notNullable()
   })
 }
 
 export async function down(knex: Knex): Promise<void> {
-  await knex.schema.dropTableIfExists('location_reports')
+  await knex.schema.dropTableIfExists('locationReports')
   await knex.schema.dropTableIfExists('locations')
   await knex.schema.dropTableIfExists('regions')
   await knex.schema.dropTableIfExists('users')
