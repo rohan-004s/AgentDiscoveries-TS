@@ -19,7 +19,9 @@ const config = {
     hostname: process.env.HOSTNAME ?? 'localhost',
     port: Number(process.env.PORT ?? 3000),
   },
-  secret: requiredEnvVariable('SECRET'),
+  session: {
+    secret: requiredEnvVariable('SESSION_SECRET'),
+  },
   environment: process.env.NODE_ENV ?? 'production',
 }
 

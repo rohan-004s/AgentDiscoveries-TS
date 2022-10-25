@@ -14,7 +14,7 @@ function app({ db }: appProperties) {
     session({
       resave: false,
       saveUninitialized: false,
-      secret: config.secret,
+      secret: config.session.secret,
     }),
   )
 

@@ -1,1 +1,1 @@
-process.env.SECRET = 'test-secret'
+process.env.SESSION_SECRET = 'test-secret'
