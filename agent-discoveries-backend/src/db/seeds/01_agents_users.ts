@@ -36,6 +36,10 @@ export async function seed(knex: Knex): Promise<void> {
       username: 'corrupt_user',
       hashed_password: 'bad hash',
     },
+    {
+      username: 'admin',
+      hashed_password: await hashPassword('password'),
+    },
   ]
 
   await knex('users').insert(users)
