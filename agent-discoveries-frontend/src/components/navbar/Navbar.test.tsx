@@ -16,4 +16,10 @@ describe('NavBar', () => {
     const navbar = screen.getByTestId('nav-bar')
     expect(navbar).toBeInTheDocument()
   })
+
+  test('Renders with all items', () => {
+    render(<NavBar />)
+    const navbarItems = screen.getAllByTestId('navbar-item')
+    expect(navbarItems).toHaveLength(3)
+  })
 })
