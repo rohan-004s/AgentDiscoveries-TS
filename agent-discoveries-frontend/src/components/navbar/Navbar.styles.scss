@@ -1,3 +1,10 @@
+$primary: #2d6986;
+$secondary: #4096bf;
+$tertiary: #79b5d2;
+$light: #b3d5e5;
+$dark: #193c4d;
+$font: #ffffff;
+
 .navbar {
   padding: 20px;
   display: flex;
@@ -5,11 +12,11 @@
   max-width: auto;
   width: auto;
   margin: 0 auto;
-  border-bottom: 1px solid #0066A1;
-  background-color: #0066A1;
+  border-bottom: 1px solid $primary;
+  background-color: $primary;
 }
 .navbar h1 {
-  color: #FFFFFF;
+  color: $font;
   padding: 20px;
   font-size: 30px;
 }
@@ -20,7 +27,7 @@
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
-  color: #FFFFFF;
+  color: $font;
   transition:all 0.2s ease-in-out;
   display: inline-block;
 }
@@ -28,9 +35,9 @@
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
-  color: #FFFFFF;
+  color: $font;
   transition:all 0.2s ease-in-out;
 }
 .navbar a:hover {
-  color: #00AFD8;
+  color: $dark;
 }
