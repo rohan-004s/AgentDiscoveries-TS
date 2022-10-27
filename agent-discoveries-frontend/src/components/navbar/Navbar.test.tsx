@@ -1,24 +1,25 @@
-import NavBar from './Navbar'
+import Navbar from './Navbar'
 import { cleanup, render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 afterEach(() => {
-    cleanup()
+  cleanup()
 })
 
-describe('NavBar', () => {
+describe('Navbar', () => {
   it('Matches the snapshot', () => {
-    const navbar = render(<NavBar />)
+    const navbar = render(<Navbar />)
     expect(navbar.asFragment()).toMatchSnapshot()
   })
 
   it('Must render on page', () => {
-    render(<NavBar />)
-    const navbar = screen.getByTestId('nav-bar')
+    render(<Navbar />)
+    const navbar = screen.getByTestId('navbar')
     expect(navbar).toBeInTheDocument()
   })
 
   test('Renders with all items', () => {
-    render(<NavBar />)
+    render(<Navbar />)
     const navbarItems = screen.getAllByTestId('navbar-item')
     expect(navbarItems).toHaveLength(3)
   })
