@@ -1,7 +1,7 @@
 import React from "react"
 import "./Navbar.styles.scss"
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
 
     return (
         <>
