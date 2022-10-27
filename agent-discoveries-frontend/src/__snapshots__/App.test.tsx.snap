@@ -1,0 +1,88 @@
+// Vitest Snapshot v1
+
+exports[`App > Matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="App"
+  >
+    <div>
+      <a
+        href="https://vitejs.dev"
+        target="_blank"
+      >
+        <img
+          alt="Vite logo"
+          class="logo"
+          src="/vite.svg"
+        />
+      </a>
+      <a
+        href="https://reactjs.org"
+        target="_blank"
+      >
+        <img
+          alt="React logo"
+          class="logo react"
+          src="/src/assets/react.svg"
+        />
+      </a>
+    </div>
+    <h1>
+      Agent Discoveries
+    </h1>
+    <div
+      class="card"
+    >
+      <form>
+        <ul>
+          <li>
+            <label
+              for="username"
+            >
+              Username 
+            </label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              value=""
+            />
+          </li>
+          <li>
+            <label
+              for="password"
+            >
+              Password 
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              value=""
+            />
+          </li>
+          <li>
+            <button
+              type="submit"
+            >
+              Submit
+            </button>
+          </li>
+        </ul>
+      </form>
+      <p>
+        Edit 
+        <code>
+          src/App.tsx
+        </code>
+         and save to test HMR
+      </p>
+    </div>
+    <p
+      class="read-the-docs"
+    >
+      Click on the Vite and React logos to learn more
+    </p>
+  </div>
+</DocumentFragment>
+`;
