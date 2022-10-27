@@ -17,10 +17,24 @@
   border-bottom: 1px solid var(--primary);
   background-color: var(--primary);
 }
-.navbar h1 {
+.navbar .items {
+  margin-left: auto;
+}
+.navbar form {
+  display: inline-block;
+  width: 50%;
+}
+.navbar input {
+  background-color: inherit;
   color: var(--font);
-  padding: 20px;
-  font-size: 30px;
+  font-size: 1.2em;
+  padding: 10px;
+  border-bottom: 1px solid var(--font);
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  display: inline-block;
+  width: 100%;
 }
 .navbar .links {
   margin-left: auto;
@@ -28,9 +42,9 @@
 .navbar a {
   margin-left: 16px;
   text-decoration: none;
+  font-size: 1.2em;
   padding: 6px;
   color: var(--font);
-  transition: all 0.2s ease-in-out;
   display: inline-block;
 }
 .navbar p {
@@ -41,5 +55,11 @@
   transition: all 0.2s ease-in-out;
 }
 .navbar a:hover {
-  color: var(--dark);
+  color: var(--font);
+  border-bottom: 1px solid var(--font);
+  padding-bottom: 5px;
+}
+.navbar img {
+  width: 50px;
+  height: 50px;
 }
