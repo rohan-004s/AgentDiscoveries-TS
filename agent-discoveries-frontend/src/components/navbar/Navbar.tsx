@@ -16,7 +16,7 @@ const Navbar = () => {
         <a href="/profile" data-testid="navbar-item">
           Your Profile
         </a>
-        <img src="/profile.png" />
+        {/* <img src="/profile.png" /> */}
       </div>
     </nav>
   )
