@@ -11,6 +11,9 @@ jobs:
         with:
           cache: 'npm'
           cache-dependency-path: agent-discoveries-backend/package-lock.json
+      - name: Install dependencies
+        working-directory: agent-discoveries-backend
+        run: npm ci
       - name: Check types
         working-directory: agent-discoveries-backend
         run: npm run test:types
@@ -25,6 +28,9 @@ jobs:
         with:
           cache: 'npm'
           cache-dependency-path: agent-discoveries-frontend/package-lock.json
+      - name: Install dependencies
+        working-directory: agent-discoveries-frontend
+        run: npm ci
       - name: Check types
         working-directory: agent-discoveries-frontend
         run: npm run test:types
