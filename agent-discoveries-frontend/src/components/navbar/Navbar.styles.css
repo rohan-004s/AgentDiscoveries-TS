@@ -1,0 +1,45 @@
+:root {
+  --primary: #2d6986;
+  --secondary: #4096bf;
+  --tertiary: #79b5d2;
+  --light: #b3d5e5;
+  --dark: #193c4d;
+  --font: #ffffff;
+}
+
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: auto;
+  width: auto;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--primary);
+  background-color: var(--primary);
+}
+.navbar h1 {
+  color: var(--font);
+  padding: 20px;
+  font-size: 30px;
+}
+.navbar .links {
+  margin-left: auto;
+}
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  color: var(--font);
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
+}
+.navbar p {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  color: var(--font);
+  transition: all 0.2s ease-in-out;
+}
+.navbar a:hover {
+  color: var(--dark);
+}
