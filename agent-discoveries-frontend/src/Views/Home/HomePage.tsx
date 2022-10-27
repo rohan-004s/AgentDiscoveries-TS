@@ -1,9 +1,7 @@
-import React from "react"
+import React from 'react'
 
-const HomePage: React.FC = () => {
-    return (
-        <></>
-    )
+const HomePage = () => {
+  return <></>
 }
 
-export default HomePage;
+export default HomePage

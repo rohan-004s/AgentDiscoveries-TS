@@ -1,9 +1,7 @@
-import React from "react"
+import React from 'react'
 
-const ProfilePage: React.FC = () => {
-    return (
-        <></>
-    )
+const ProfilePage = () => {
+  return <></>
 }
 
-export default ProfilePage;
+export default ProfilePage
