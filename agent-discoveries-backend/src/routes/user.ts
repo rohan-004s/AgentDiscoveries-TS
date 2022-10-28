@@ -46,6 +46,34 @@ function createRouter(db: Knex) {
     }
   })
 
+  router.put('/update', auth.isLoggedIn, async (req, res) => {
+    const { password, imageUrl } = req.body
+
+    interface Changes {
+      hashedPassword?: string
+      imageUrl?: string
+    }
+
+    const changes: Changes = {}
+
+    if (password !== undefined) {
+      const hashedPassword = await hashPassword(password)
+      changes.hashedPassword = hashedPassword
+    }
+    if (imageUrl !== undefined) {
+      changes.imageUrl = imageUrl
+    }
+
+    try {
+      await db('users')
+        .where({ userId: req.session.user?.userId })
+        .update(changes)
+      res.status(200).send()
+    } catch (e) {
+      res.status(400).send()
+    }
+  })
+
   return router
 }
 
