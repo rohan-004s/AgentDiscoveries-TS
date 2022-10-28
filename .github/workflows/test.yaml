@@ -1,0 +1,39 @@
+name: Test
+on:
+  - push
+  - pull_request
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+          cache-dependency-path: agent-discoveries-backend/package-lock.json
+      - name: Install dependencies
+        working-directory: agent-discoveries-backend
+        run: npm ci
+      - name: Check types
+        working-directory: agent-discoveries-backend
+        run: npm run test:types
+      - name: Run tests
+        working-directory: agent-discoveries-backend
+        run: npm run test:jest
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+          cache-dependency-path: agent-discoveries-frontend/package-lock.json
+      - name: Install dependencies
+        working-directory: agent-discoveries-frontend
+        run: npm ci
+      - name: Check types
+        working-directory: agent-discoveries-frontend
+        run: npm run test:types
+      - name: Run tests
+        working-directory: agent-discoveries-frontend
+        run: npm run test:vitest
