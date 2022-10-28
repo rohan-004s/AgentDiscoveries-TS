@@ -7,12 +7,16 @@ exports[`Navbar > Matches the snapshot 1`] = `
     data-testid="navbar"
     id="navbar"
   >
-    <h1
-      class="title"
-      id="navbar-title"
+    <form
+      id="search-agent-network"
     >
-      Agent Discoveries
-    </h1>
+      <input
+        id="search"
+        name="search-network"
+        placeholder="Search the agent network"
+        type="search"
+      />
+    </form>
     <div
       class="items"
       data-testid="navbar-items"
@@ -30,11 +34,17 @@ exports[`Navbar > Matches the snapshot 1`] = `
       >
         About
       </a>
+    </div>
+    <div
+      class="profile"
+    >
       <a
         data-testid="navbar-item"
         href="/profile"
       >
-        Your Profile
+        <img
+          src="/defaultProfile.png"
+        />
       </a>
     </div>
   </nav>

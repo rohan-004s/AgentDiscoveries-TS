@@ -1,9 +1,13 @@
 import './Navbar.styles.css'
 
-const Navbar = (imageUrl: string) => {
+interface NavArgs {
+  imageUrl?: string
+}
+
+const Navbar: React.FC<NavArgs> = (props) => {
   var profileUrl = '/defaultProfile.png'
-  if (imageUrl !== undefined && imageUrl.length > 0) {
-    profileUrl = imageUrl
+  if (props.imageUrl !== undefined && props.imageUrl.length > 0) {
+    profileUrl = props.imageUrl
   }
 
   return (
