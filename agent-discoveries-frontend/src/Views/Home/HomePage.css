@@ -1,0 +1,19 @@
+#main{
+    padding: 2px; 
+    position:absolute;
+    top:5px;
+    right:5px;
+    bottom:5px;
+    left:5px;
+    display: grid;
+    grid-template-columns: 25%;
+    grid-template-rows: 20%;
+    grid-template-areas: 
+        'title title title title'
+        'agentsList messageBoard messageBoard postMessage'
+        'agentsList messageBoard messageBoard postMessage'
+        'agentsList messageBoard messageBoard postMessage'
+        'agentsList messageBoard messageBoard postMessage';
+    grid-gap: 10px; 
+    background-color: white;
+}
