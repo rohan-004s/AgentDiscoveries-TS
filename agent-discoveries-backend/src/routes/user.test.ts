@@ -4,6 +4,7 @@ import { Knex } from 'knex'
 import createDbConnection from '../db'
 import { Express } from 'express'
 import { User } from '../models/user'
+import { doPasswordsMatch } from '../utils/crypto'
 
 let db: Knex
 let server: Express
@@ -120,5 +121,69 @@ describe('The login route', () => {
         }),
       )
     expect(response.get('Set-Cookie')).toBeUndefined()
+  })
+})
+
+describe('The update route', () => {
+  beforeAll(async () => {
+    db = createDbConnection()
+    await db.migrate.latest()
+    await db.seed.run()
+    server = app({ db })
+  })
+
+  afterAll(() => {
+    db.destroy()
+  })
+
+  it('Returns 200 when successful', async () => {
+    const loginResponse = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(
+        JSON.stringify({ username: 'test_user', password: 'password' }),
+      )
+    const response = await request(server)
+      .put('/user/update')
+      .set('Content-Type', 'application/json')
+      .set('Cookie', loginResponse.get('Set-Cookie'))
+      .send(
+        JSON.stringify({
+          password: 'newpassword',
+          imageUrl: 'https://example.com',
+        }),
+      )
+    expect(response.statusCode).toBe(200)
+  })
+
+  it('Does update the database', async () => {
+    const loginResponse = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(
+        // use newpassword here because the previous test changed the password
+        JSON.stringify({ username: 'test_user', password: 'newpassword' }),
+      )
+
+    const changes = {
+      password: 'newerpassword',
+      imageUrl: 'https://example.com',
+    }
+
+    const response = await request(server)
+      .put('/user/update')
+      .set('Content-Type', 'application/json')
+      .set('Cookie', loginResponse.get('Set-Cookie'))
+      .send(JSON.stringify(changes))
+    expect(response.statusCode).toBe(200)
+
+    const [{ hashedPassword }] = await db
+      .select('hashedPassword')
+      .from<User>('users')
+      .where({ username: 'test_user' })
+
+    expect(await doPasswordsMatch(changes.password, hashedPassword)).toBe(
+      true,
+    )
   })
 })
