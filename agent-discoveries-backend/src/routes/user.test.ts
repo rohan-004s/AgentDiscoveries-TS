@@ -216,6 +216,12 @@ describe('The delete route', () => {
       admin: 0,
       imageUrl: null,
     })
+    // now make sure admin user is in-fact an admin
+    await db('users').update({ admin: 1 }).where({ username: 'admin' })
+  })
+
+  afterEach(async () => {
+    await db('users').delete().where({ username: 'tmpUser' })
   })
 
   afterAll(() => {
@@ -233,7 +239,7 @@ describe('The delete route', () => {
       .put('/user/delete')
       .set('Content-Type', 'application/json')
       .set('Cookie', loginResponse.get('Set-Cookie'))
-      .send()
+      .send(JSON.stringify({ user: 'tmpUser' }))
     expect(response.statusCode).toBe(200)
   })
 
@@ -249,7 +255,7 @@ describe('The delete route', () => {
       .put('/user/delete')
       .set('Content-Type', 'application/json')
       .set('Cookie', loginResponse.get('Set-Cookie'))
-      .send()
+      .send(JSON.stringify({ user: 'tmpUser' }))
 
     const dbResponse = await db
       .select()
@@ -257,6 +263,49 @@ describe('The delete route', () => {
       .where({ username: 'tmpUser' })
 
     expect(dbResponse).toHaveLength(0)
+  })
+
+  it('Can delete other users if admin', async () => {
+    const loginResponse = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(JSON.stringify({ username: 'admin', password: 'password' }))
+    const response = await request(server)
+      .put('/user/delete')
+      .set('Content-Type', 'application/json')
+      .set('Cookie', loginResponse.get('Set-Cookie'))
+      .send(JSON.stringify({ user: 'tmpUser' }))
+    expect(response.statusCode).toBe(200)
+  })
+
+  it('Cannot delete other users if not admin', async () => {
+    const loginResponse = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(
+        JSON.stringify({ username: 'test_user', password: 'password' }),
+      )
+    const response = await request(server)
+      .put('/user/delete')
+      .set('Content-Type', 'application/json')
+      .set('Cookie', loginResponse.get('Set-Cookie'))
+      .send(JSON.stringify({ user: 'tmpUser' }))
+    expect(response.statusCode).toBe(403)
+  })
+
+  it('Requires a user to be specified for deletion', async () => {
+    const loginResponse = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(
+        JSON.stringify({ username: 'tmpUser', password: 'tmpPassword' }),
+      )
+    const response = await request(server)
+      .put('/user/delete')
+      .set('Content-Type', 'application/json')
+      .set('Cookie', loginResponse.get('Set-Cookie'))
+      .send()
+    expect(response.statusCode).toBe(400)
   })
 })
 
