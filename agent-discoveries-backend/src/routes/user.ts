@@ -75,14 +75,25 @@ function createRouter(db: Knex) {
   })
 
   router.put('/delete', auth.isLoggedIn, async (req, res) => {
-    if (req.session.user?.userId === undefined) {
-      return res.status(400).send()
+    const { user } = req.body
+    if (user === undefined) {
+      return res.status(400).send('must specify a user to delete')
+    }
+
+    if (req.session.user?.username !== user) {
+      // if we are trying to delete another user
+      let dbResponse = await db('users')
+        .select('admin')
+        .where({ userId: req.session.user?.userId })
+
+      let admin = dbResponse[0].admin
+      if (!admin) {
+        return res.status(403).send('non-admin cannot delete other users')
+      }
     }
 
     try {
-      await db('users')
-        .delete()
-        .where({ userId: req.session.user?.userId })
+      await db('users').delete().where({ username: user })
       res.status(200).send()
     } catch (e) {
       res.status(400).send()
