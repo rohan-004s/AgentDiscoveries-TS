@@ -89,6 +89,19 @@ function createRouter(db: Knex) {
     }
   })
 
+  router.get('/get', auth.isLoggedIn, async (req, res) => {
+    var query = db('users').select('userId', 'username', 'imageUrl')
+    if (req.query.username !== undefined) {
+      query = query.where({ username: req.query.username })
+    }
+    try {
+      const users = await query
+      res.status(200).json(users)
+    } catch (e) {
+      res.status(400).send()
+    }
+  })
+
   return router
 }
 
