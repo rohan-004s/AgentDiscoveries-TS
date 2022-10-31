@@ -259,3 +259,75 @@ describe('The delete route', () => {
     expect(dbResponse).toHaveLength(0)
   })
 })
+
+describe('The get route', () => {
+  beforeAll(async () => {
+    db = createDbConnection()
+    await db.migrate.latest()
+    await db.seed.run()
+    server = app({ db })
+  })
+
+  afterAll(() => {
+    db.destroy()
+  })
+
+  it('Returns 200 when successful', async () => {
+    const loginResponse = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(
+        JSON.stringify({ username: 'test_user', password: 'password' }),
+      )
+    const response = await request(server)
+      .get('/user/get')
+      .set('Content-Type', 'application/json')
+      .set('Cookie', loginResponse.get('Set-Cookie'))
+      .send()
+    expect(response.statusCode).toBe(200)
+  })
+
+  it('Can return all users', async () => {
+    const dbResponse = await db('users').select(
+      'userId',
+      'username',
+      'imageUrl',
+    )
+
+    const loginResponse = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(
+        JSON.stringify({ username: 'test_user', password: 'password' }),
+      )
+
+    const query = await request(server)
+      .get('/user/get')
+      .set('Content-Type', 'application/json')
+      .set('Cookie', loginResponse.get('Set-Cookie'))
+      .send()
+
+    expect(JSON.parse(query.text)).toEqual(dbResponse)
+  })
+
+  it('Can return a specific user', async () => {
+    const dbResponse = await db('users')
+      .select('userId', 'username', 'imageUrl')
+      .where({ username: 'test_user' })
+
+    const loginResponse = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(
+        JSON.stringify({ username: 'test_user', password: 'password' }),
+      )
+
+    const query = await request(server)
+      .get('/user/get?username=test_user')
+      .set('Content-Type', 'application/json')
+      .set('Cookie', loginResponse.get('Set-Cookie'))
+      .send()
+
+    expect(JSON.parse(query.text)).toEqual(dbResponse)
+  })
+})
