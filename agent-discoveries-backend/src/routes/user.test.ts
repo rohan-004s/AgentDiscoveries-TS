@@ -4,7 +4,7 @@ import { Knex } from 'knex'
 import createDbConnection from '../db'
 import { Express } from 'express'
 import { User } from '../models/user'
-import { doPasswordsMatch } from '../utils/crypto'
+import { doPasswordsMatch, hashPassword } from '../utils/crypto'
 
 let db: Knex
 let server: Express
@@ -132,6 +132,13 @@ describe('The update route', () => {
     server = app({ db })
   })
 
+  beforeEach(async () => {
+    const hp = await hashPassword('password')
+    await db('users')
+      .update({ hashedPassword: hp })
+      .where({ username: 'test_user' })
+  })
+
   afterAll(() => {
     db.destroy()
   })
@@ -161,12 +168,11 @@ describe('The update route', () => {
       .post('/user/login')
       .set('Content-Type', 'application/json')
       .send(
-        // use newpassword here because the previous test changed the password
-        JSON.stringify({ username: 'test_user', password: 'newpassword' }),
+        JSON.stringify({ username: 'test_user', password: 'password' }),
       )
 
     const changes = {
-      password: 'newerpassword',
+      password: 'newpassword',
       imageUrl: 'https://example.com',
     }
 
