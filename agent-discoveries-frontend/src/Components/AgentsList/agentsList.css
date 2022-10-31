@@ -1,0 +1,10 @@
+#agents {
+    font-size: 30px;
+    color: #1976D2;
+    font-family: 'Play', sans-serif;
+    text-shadow: 1px 1px 1px black;
+    grid-area: agentsList;
+    background-color: rgba(255, 255, 255, 0.884);
+    border-radius: 10px;
+    border: 2px solid #1976D2;
+}

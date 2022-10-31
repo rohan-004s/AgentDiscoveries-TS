@@ -1,15 +1,23 @@
 {
 	"folders": [
 		{
+			"name": "Backend",
 			"path": "agent-discoveries-backend"
 		},
 		{
+			"name": "Frontend",
 			"path": "agent-discoveries-frontend"
+		},
+		{
+			"name": "Root",
+			"path": "."
 		}
 	],
 	"settings": {
 		"jest.disabledWorkspaceFolders": [
-			"agent-discoveries-frontend"
-		]
+			"Frontend",
+			"Root"
+		],
+		"jest.autoRun": "off"
 	}
 }
