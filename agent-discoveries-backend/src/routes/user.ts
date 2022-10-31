@@ -74,6 +74,21 @@ function createRouter(db: Knex) {
     }
   })
 
+  router.put('/delete', auth.isLoggedIn, async (req, res) => {
+    if (req.session.user?.userId === undefined) {
+      return res.status(400).send()
+    }
+
+    try {
+      await db('users')
+        .delete()
+        .where({ userId: req.session.user?.userId })
+      res.status(200).send()
+    } catch (e) {
+      res.status(400).send()
+    }
+  })
+
   return router
 }
 
