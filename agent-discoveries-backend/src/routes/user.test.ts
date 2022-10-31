@@ -193,3 +193,65 @@ describe('The update route', () => {
     )
   })
 })
+
+describe('The delete route', () => {
+  beforeAll(async () => {
+    db = createDbConnection()
+    await db.migrate.latest()
+    await db.seed.run()
+    server = app({ db })
+  })
+
+  beforeEach(async () => {
+    const hp = await hashPassword('tmpPassword')
+    await db('users').insert({
+      userId: 5,
+      username: 'tmpUser',
+      hashedPassword: hp,
+      agentId: null,
+      admin: 0,
+      imageUrl: null,
+    })
+  })
+
+  afterAll(() => {
+    db.destroy()
+  })
+
+  it('Returns 200 when successful', async () => {
+    const loginResponse = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(
+        JSON.stringify({ username: 'tmpUser', password: 'tmpPassword' }),
+      )
+    const response = await request(server)
+      .put('/user/delete')
+      .set('Content-Type', 'application/json')
+      .set('Cookie', loginResponse.get('Set-Cookie'))
+      .send()
+    expect(response.statusCode).toBe(200)
+  })
+
+  it('Does update the database', async () => {
+    const loginResponse = await request(server)
+      .post('/user/login')
+      .set('Content-Type', 'application/json')
+      .send(
+        JSON.stringify({ username: 'tmpUser', password: 'tmpPassword' }),
+      )
+
+    await request(server)
+      .put('/user/delete')
+      .set('Content-Type', 'application/json')
+      .set('Cookie', loginResponse.get('Set-Cookie'))
+      .send()
+
+    const dbResponse = await db
+      .select()
+      .from<User>('users')
+      .where({ username: 'tmpUser' })
+
+    expect(dbResponse).toHaveLength(0)
+  })
+})
