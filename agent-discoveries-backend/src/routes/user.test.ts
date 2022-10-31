@@ -132,12 +132,16 @@ describe('The update route', () => {
     server = app({ db })
   })
 
-  beforeEach(async () => {
+  const resetDefaultPassword = async () => {
     const hp = await hashPassword('password')
     await db('users')
       .update({ hashedPassword: hp })
       .where({ username: 'test_user' })
-  })
+  }
+
+  beforeEach(resetDefaultPassword)
+
+  afterEach(resetDefaultPassword)
 
   afterAll(() => {
     db.destroy()
