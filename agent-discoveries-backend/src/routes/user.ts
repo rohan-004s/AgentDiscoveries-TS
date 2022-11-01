@@ -23,6 +23,19 @@ function createRouter(db: Knex) {
     res.status(200).send()
   })
 
+  router.get('/:userId', auth.isLoggedIn, async (req, res) => {
+    var query = db('users')
+      .select('userId', 'username', 'imageUrl')
+      .where({ username: req.params.userId })
+
+    try {
+      const users = await query
+      res.status(200).json(users)
+    } catch (e) {
+      res.status(400).send()
+    }
+  })
+
   router.post('/login', async (req, res) => {
     const { username, password } = req.body
 
@@ -95,19 +108,6 @@ function createRouter(db: Knex) {
     try {
       await db('users').delete().where({ username: user })
       res.status(200).send()
-    } catch (e) {
-      res.status(400).send()
-    }
-  })
-
-  router.get('/get', auth.isLoggedIn, async (req, res) => {
-    var query = db('users').select('userId', 'username', 'imageUrl')
-    if (req.query.username !== undefined) {
-      query = query.where({ username: req.query.username })
-    }
-    try {
-      const users = await query
-      res.status(200).json(users)
     } catch (e) {
       res.status(400).send()
     }

@@ -329,34 +329,11 @@ describe('The get route', () => {
         JSON.stringify({ username: 'test_user', password: 'password' }),
       )
     const response = await request(server)
-      .get('/user/get')
+      .get('/user/test_user')
       .set('Content-Type', 'application/json')
       .set('Cookie', loginResponse.get('Set-Cookie'))
       .send()
     expect(response.statusCode).toBe(200)
-  })
-
-  it('Can return all users', async () => {
-    const dbResponse = await db('users').select(
-      'userId',
-      'username',
-      'imageUrl',
-    )
-
-    const loginResponse = await request(server)
-      .post('/user/login')
-      .set('Content-Type', 'application/json')
-      .send(
-        JSON.stringify({ username: 'test_user', password: 'password' }),
-      )
-
-    const query = await request(server)
-      .get('/user/get')
-      .set('Content-Type', 'application/json')
-      .set('Cookie', loginResponse.get('Set-Cookie'))
-      .send()
-
-    expect(JSON.parse(query.text)).toEqual(dbResponse)
   })
 
   it('Can return a specific user', async () => {
@@ -372,7 +349,7 @@ describe('The get route', () => {
       )
 
     const query = await request(server)
-      .get('/user/get?username=test_user')
+      .get('/user/test_user')
       .set('Content-Type', 'application/json')
       .set('Cookie', loginResponse.get('Set-Cookie'))
       .send()
