@@ -2,42 +2,55 @@
 
 exports[`App > Matches the snapshot 1`] = `
 <DocumentFragment>
-  <form>
-    <ul>
-      <li>
-        <label
-          for="username"
-        >
-          Username 
-        </label>
+  <main
+    id="mainLogin"
+  >
+    <div
+      id="spyImage"
+    >
+      <img
+        alt="spy image"
+        height="100%"
+        id="image"
+        src="/src/Components/SpyImage/spy.jpg"
+        width="100%"
+      />
+    </div>
+    <div
+      id="loginDetails"
+    >
+      <h2>
+        You saw something?
+        <br />
+        <br />
+        Log in to access the biggest network for secret agents.
+      </h2>
+      <form
+        id="form"
+      >
         <input
           id="username"
           name="username"
+          placeholder="Username"
           type="text"
           value=""
         />
-      </li>
-      <li>
-        <label
-          for="password"
-        >
-          Password 
-        </label>
+        <br />
         <input
           id="password"
           name="password"
-          type="password"
+          placeholder="Password"
+          type="text"
           value=""
         />
-      </li>
-      <li>
-        <button
+        <br />
+        <input
+          id="login"
           type="submit"
-        >
-          Submit
-        </button>
-      </li>
-    </ul>
-  </form>
+          value="Login"
+        />
+      </form>
+    </div>
+  </main>
 </DocumentFragment>
 `;
