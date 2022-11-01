@@ -23,6 +23,19 @@ function createRouter(db: Knex) {
     res.status(200).send()
   })
 
+  router.get('/:userId', auth.isLoggedIn, async (req, res) => {
+    var query = db('users')
+      .select('userId', 'username', 'imageUrl')
+      .where({ username: req.params.userId })
+
+    try {
+      const users = await query
+      res.status(200).json(users)
+    } catch (e) {
+      res.status(400).send()
+    }
+  })
+
   router.post('/login', async (req, res) => {
     const { username, password } = req.body
 
@@ -41,6 +54,60 @@ function createRouter(db: Knex) {
       )[0]
 
       res.status(200).json({ username }).send()
+    } catch (e) {
+      res.status(400).send()
+    }
+  })
+
+  router.put('/update', auth.isLoggedIn, async (req, res) => {
+    const { password, imageUrl } = req.body
+
+    interface Changes {
+      hashedPassword?: string
+      imageUrl?: string
+    }
+
+    const changes: Changes = {}
+
+    if (password !== undefined) {
+      const hashedPassword = await hashPassword(password)
+      changes.hashedPassword = hashedPassword
+    }
+    if (imageUrl !== undefined) {
+      changes.imageUrl = imageUrl
+    }
+
+    try {
+      await db('users')
+        .where({ userId: req.session.user?.userId })
+        .update(changes)
+      res.status(200).send()
+    } catch (e) {
+      res.status(400).send()
+    }
+  })
+
+  router.put('/delete', auth.isLoggedIn, async (req, res) => {
+    const { user } = req.body
+    if (user === undefined) {
+      return res.status(400).send('must specify a user to delete')
+    }
+
+    if (req.session.user?.username !== user) {
+      // if we are trying to delete another user
+      let dbResponse = await db('users')
+        .select('admin')
+        .where({ userId: req.session.user?.userId })
+
+      let admin = dbResponse[0].admin
+      if (!admin) {
+        return res.status(403).send('non-admin cannot delete other users')
+      }
+    }
+
+    try {
+      await db('users').delete().where({ username: user })
+      res.status(200).send()
     } catch (e) {
       res.status(400).send()
     }
