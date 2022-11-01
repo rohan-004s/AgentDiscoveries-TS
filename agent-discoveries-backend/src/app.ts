@@ -3,6 +3,7 @@ import session from 'express-session'
 import { Knex } from 'knex'
 import config from './config'
 import connectSessionKnex from 'connect-session-knex'
+import agent from './routes/agent'
 import user from './routes/user'
 import cors from 'cors'
 
@@ -32,6 +33,8 @@ function app({ db }: appProperties) {
     const test = await db('sqlite_master').select('*')
     res.status(200).json({ status: 'ok', test })
   })
+
+  app.use('/agent', agent(db))
 
   app.use('/user', user(db))
 

@@ -87,8 +87,8 @@ function createRouter(db: Knex) {
     }
   })
 
-  router.put('/delete', auth.isLoggedIn, async (req, res) => {
-    const { user } = req.body
+  router.put('/delete/:user', auth.isLoggedIn, async (req, res) => {
+    const user = req.params.user
     if (user === undefined) {
       return res.status(400).send('must specify a user to delete')
     }
