@@ -1,0 +1,52 @@
+// Vitest Snapshot v1
+
+exports[`Navbar > Matches the snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="navbar"
+    data-testid="navbar"
+    id="navbar"
+  >
+    <form
+      id="search-agent-network"
+    >
+      <input
+        id="search"
+        name="search-network"
+        placeholder="Search the agent network"
+        type="search"
+      />
+    </form>
+    <div
+      class="items"
+      data-testid="navbar-items"
+      id="navbar-items"
+    >
+      <a
+        data-testid="navbar-item"
+        href="/home"
+      >
+        Homepage
+      </a>
+      <a
+        data-testid="navbar-item"
+        href="/about"
+      >
+        About
+      </a>
+    </div>
+    <div
+      class="profile"
+    >
+      <a
+        data-testid="navbar-item"
+        href="/profile"
+      >
+        <img
+          src="/defaultProfile.png"
+        />
+      </a>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
