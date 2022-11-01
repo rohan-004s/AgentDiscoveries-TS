@@ -56,8 +56,8 @@ function createRouter(db: Knex) {
     }
   })
 
-  router.put('/delete', auth.isLoggedIn, async (req, res) => {
-    const { callSign } = req.body
+  router.put('/delete/:callSign', auth.isLoggedIn, async (req, res) => {
+    const callSign = req.params.callSign
     if (callSign === undefined) {
       return res.status(400).send('must specify an agent to delete')
     }

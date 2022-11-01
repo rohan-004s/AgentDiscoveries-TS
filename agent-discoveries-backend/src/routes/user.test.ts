@@ -236,10 +236,10 @@ describe('The delete route', () => {
         JSON.stringify({ username: 'tmpUser', password: 'tmpPassword' }),
       )
     const response = await request(server)
-      .put('/user/delete')
+      .put('/user/delete/tmpUser')
       .set('Content-Type', 'application/json')
       .set('Cookie', loginResponse.get('Set-Cookie'))
-      .send(JSON.stringify({ user: 'tmpUser' }))
+      .send()
     expect(response.statusCode).toBe(200)
   })
 
@@ -252,10 +252,10 @@ describe('The delete route', () => {
       )
 
     await request(server)
-      .put('/user/delete')
+      .put('/user/delete/tmpUser')
       .set('Content-Type', 'application/json')
       .set('Cookie', loginResponse.get('Set-Cookie'))
-      .send(JSON.stringify({ user: 'tmpUser' }))
+      .send()
 
     const dbResponse = await db
       .select()
@@ -271,10 +271,10 @@ describe('The delete route', () => {
       .set('Content-Type', 'application/json')
       .send(JSON.stringify({ username: 'admin', password: 'password' }))
     const response = await request(server)
-      .put('/user/delete')
+      .put('/user/delete/tmpUser')
       .set('Content-Type', 'application/json')
       .set('Cookie', loginResponse.get('Set-Cookie'))
-      .send(JSON.stringify({ user: 'tmpUser' }))
+      .send()
     expect(response.statusCode).toBe(200)
   })
 
@@ -286,10 +286,10 @@ describe('The delete route', () => {
         JSON.stringify({ username: 'test_user', password: 'password' }),
       )
     const response = await request(server)
-      .put('/user/delete')
+      .put('/user/delete/tmpUser')
       .set('Content-Type', 'application/json')
       .set('Cookie', loginResponse.get('Set-Cookie'))
-      .send(JSON.stringify({ user: 'tmpUser' }))
+      .send()
     expect(response.statusCode).toBe(403)
   })
 
@@ -305,7 +305,7 @@ describe('The delete route', () => {
       .set('Content-Type', 'application/json')
       .set('Cookie', loginResponse.get('Set-Cookie'))
       .send()
-    expect(response.statusCode).toBe(400)
+    expect(response.statusCode).toBe(404)
   })
 })
 
