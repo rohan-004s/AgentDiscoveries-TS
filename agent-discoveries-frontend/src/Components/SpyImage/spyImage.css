@@ -1,0 +1,8 @@
+#spyImage {
+    grid-area: 'spyImage';
+    background-color: rgba(255, 255, 255, 0.884);
+}
+
+# image {
+    padding: 30px 10px 30px 0px;
+}
