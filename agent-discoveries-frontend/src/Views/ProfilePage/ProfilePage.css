@@ -1,0 +1,36 @@
+body {
+  flex: none;
+}
+
+.page {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.page > * {
+  flex: 1 100%;
+}
+
+.banner {
+  text-align: center;
+  background-color: orange;
+}
+
+.column {
+  width: 50%;
+  flex: 1 auto;
+  text-align: center;
+}
+
+.column1 {
+  background: rgb(36, 1, 235);
+}
+
+.column2 {
+  background: rgb(250, 3, 3);
+}
+
+footer button {
+  width: 50%;
+  text-align: center;
+}
